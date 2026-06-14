@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd /c/Users/user/project/664deaeb/public && grep -oE 'var\\\\\\(--[a-z0-9-]+\\\\\\)' style.css | sort -u | sed 's/var\\(--//;s/\\)//' > /tmp/used.txt && grep -oE '^\\\\s*--[a-z0-9-]+:' style.css | sed 's/[: ]//g;s/--//' | sort -u > /tmp/defined.txt && echo \"=== USED but NOT DEFINED ===\" && comm -23 /tmp/used.txt /tmp/defined.txt)",
+      "Read(//c/Users/user/project/664deaeb/**)"
+    ]
+  }
+}

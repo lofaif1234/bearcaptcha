@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BearCaptcha</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+<!-- Atmosphere: one warm shaft of light from upper-right; grain tooth -->
+<div class="atmosphere" aria-hidden="true">
+  <span class="blob"></span>
+</div>
+<div class="grain" aria-hidden="true"></div>
+
+<!-- ANNOUNCEMENT BAR -->
+<div class="announce">
+  <span class="announce-dot" aria-hidden="true"></span>
+  <span><strong>BearCaptcha</strong> now resolves Arkose FunCaptcha in under 30 seconds.</span>
+  <a href="#" data-scroll="docs" class="announce-link">Read the docs<i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+</div>
+
+<!-- NAV -->
+<nav class="navbar">
+  <a class="navbar-brand" href="#" data-view="home">
+    <span class="brand-icon"><i class="fa-solid fa-paw"></i></span>
+    BearCaptcha
+  </a>
+  <ul class="navbar-links" id="navLinks">
+    <li><a href="#" data-view="home">Home</a></li>
+    <li><a href="#" data-scroll="solutions">Solutions</a></li>
+    <li><a href="#" data-scroll="integrations">Integrations</a></li>
+    <li><a href="#" data-scroll="docs">Docs</a></li>
+    <li><a href="#" data-scroll="pricing">Pricing</a></li>
+    <li><a href="#" data-view="panel">My Panel</a></li>
+  </ul>
+  <div class="navbar-actions">
+    <button class="btn btn-ghost btn-sm" id="adminBtn">
+      <i class="fa-solid fa-lock"></i> Admin
+    </button>
+    <button class="btn btn-primary btn-sm" data-view="panel">Start now</button>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks">
+      <i class="fa-solid fa-bars" aria-hidden="true"></i>
+    </button>
+  </div>
+</nav>
+
+<!-- ================================================================ HOME -->
+<div id="view-home" class="view active">
+
+  <!-- HERO (centered, paired product visual, glow backdrop) -->
+  <section class="hero">
+    <div class="hero-copy reveal-on-scroll">
+      <span class="pill">
+        <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+        Production-grade FunCaptcha solver
+      </span>
+      <h1 class="hero-title">
+        Funcaptcha,
+        <em>solved cold.</em>
+      </h1>
+      <p class="hero-sub">
+        BearCaptcha resolves Arkose Labs FunCaptcha through a distributed human solver
+        network and returns a verified token in a single call. Built for developers
+        collecting publicly available web data at scale.
+      </p>
+      <div class="hero-actions">
+        <button class="btn btn-primary btn-lg" data-view="panel">
+          <i class="fa-solid fa-key" aria-hidden="true"></i> Start now
+        </button>
+        <a href="#" class="btn btn-outline btn-lg" data-scroll="docs">
+          Read API docs
+        </a>
+      </div>
+    </div>
+
+    <!-- Paired visual: live code panel -->
+    <div class="hero-visual reveal-on-scroll">
+      <div class="terminal">
+        <div class="terminal-bar">
+          <span class="t-tab">solve.py</span>
+        </div>
+        <div class="terminal-body"><span class="t-dim">import</span> requests
+
+API_KEY    = <span class="t-str">"brk_a8f3d..."</span>
+BASE       = <span class="t-str">"https://bearcaptcha.live/api"</span>
+PAGE_URL   = <span class="t-str">"https://target-site.com/login"</span>
+PUBLIC_KEY = <span class="t-str">"YOUR-ARKOSE-PUBLIC-KEY"</span>
+
+<span class="t-dim">def</span> <span class="t-key">get_token</span>():
+    r = requests.<span class="t-val">post</span>(
+        <span class="t-str">f"{BASE}/captcha/solve"</span>,
+        headers={<span class="t-str">"X-API-Key"</span>: API_KEY},
+        json={<span class="t-str">"pageurl"</span>: PAGE_URL, <span class="t-str">"publickey"</span>: PUBLIC_KEY},
+        timeout=<span class="t-val">60</span>
+    )
+    <span class="t-dim">return</span> r.json()[<span class="t-str">"token"</span>]
+
+token = get_token()
+<span class="t-comment"># token ready to use</span></div>
+        <div class="terminal-status">
+          <div class="status-dot"></div>
+          200 OK &nbsp;&middot;&nbsp; 18.4s &nbsp;&middot;&nbsp; credits_remaining: 499
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST STRIP (proof row under hero — quiet signals, not animated counters) -->
+  <section class="trust">
+    <div class="trust-inner">
+      <div class="trust-item">
+        <span class="trust-val" id="hs-requests">—</span>
+        <span class="trust-lbl">Solves completed</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-val">95%+</span>
+        <span class="trust-lbl">Pass rate</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-val">&lt;30s</span>
+        <span class="trust-lbl">Avg response</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-val">24/7</span>
+        <span class="trust-lbl">Solver network</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLUTIONS (3 big icon-led cards) -->
+  <section class="section section-solutions" id="solutions">
+    <div class="section-inner reveal-on-scroll">
+      <div class="section-head">
+        <div>
+          <div class="section-label">Solutions</div>
+          <h2 class="section-title">Built for web data &amp; automation workflows</h2>
+        </div>
+        <p class="section-sub">One verified token, three places it unblocks your pipeline. No image handling on your end.</p>
+      </div>
+
+      <div class="solution-grid">
+        <article class="card-lg">
+          <div class="card-icon"><i class="fa-solid fa-spider" aria-hidden="true"></i></div>
+          <h3>Web scraping</h3>
+          <p>Resolve the FunCaptcha gate in front of your target and keep your crawler moving. Pass the token straight through — no session juggling.</p>
+        </article>
+        <article class="card-lg">
+          <div class="card-icon"><i class="fa-solid fa-robot" aria-hidden="true"></i></div>
+          <h3>Test &amp; RPA automation</h3>
+          <p>Drop a single HTTP call into Selenium, Playwright, or Puppeteer flows. Works the same from a VPS, a desktop, or Android via Termux.</p>
+        </article>
+        <article class="card-lg">
+          <div class="card-icon"><i class="fa-solid fa-layer-group" aria-hidden="true"></i></div>
+          <h3>High-volume pipelines</h3>
+          <p>Credit-based, concurrency-friendly, WebSocket-ready. Buy once, run at your own pace — one credit per successful solve, no expiry.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- USE CASES (denser tiles — subordinate to solution cards) -->
+  <section class="section section-cases">
+    <div class="section-inner reveal-on-scroll">
+      <h2 class="section-title">Wherever Arkose FunCaptcha stands in the way</h2>
+
+      <div class="case-grid">
+        <div class="case-tile"><i class="fa-solid fa-user-plus" aria-hidden="true"></i><span>Account registration</span></div>
+        <div class="case-tile"><i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i><span>Login verification</span></div>
+        <div class="case-tile"><i class="fa-solid fa-cart-shopping" aria-hidden="true"></i><span>Checkout &amp; pricing</span></div>
+        <div class="case-tile"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><span>SERP &amp; search data</span></div>
+        <div class="case-tile"><i class="fa-solid fa-hashtag" aria-hidden="true"></i><span>Social monitoring</span></div>
+        <div class="case-tile"><i class="fa-solid fa-chart-line" aria-hidden="true"></i><span>Market research</span></div>
+        <div class="case-tile"><i class="fa-solid fa-ticket" aria-hidden="true"></i><span>Inventory checks</span></div>
+        <div class="case-tile"><i class="fa-solid fa-shield-cat" aria-hidden="true"></i><span>Brand protection</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTEGRATIONS (SDK / framework row — the "logo marquee") -->
+  <section class="section section-integrations" id="integrations">
+    <div class="section-inner reveal-on-scroll">
+      <div class="section-head">
+        <div>
+          <div class="section-label">Integrations</div>
+          <h2 class="section-title">Drops into the stack you already run</h2>
+        </div>
+        <div class="section-head-actions">
+          <a href="#" class="btn btn-outline btn-sm" data-scroll="docs">Read API docs</a>
+        </div>
+      </div>
+
+      <div class="logo-row">
+        <div class="logo-chip"><i class="fa-brands fa-python" aria-hidden="true"></i> Python</div>
+        <div class="logo-chip"><i class="fa-brands fa-node-js" aria-hidden="true"></i> Node.js</div>
+        <div class="logo-chip"><i class="fa-solid fa-terminal" aria-hidden="true"></i> cURL</div>
+        <div class="logo-chip"><i class="fa-solid fa-bolt" aria-hidden="true"></i> WebSocket</div>
+        <div class="logo-chip"><i class="fa-solid fa-mobile-screen" aria-hidden="true"></i> Termux</div>
+        <div class="logo-chip"><i class="fa-brands fa-chrome" aria-hidden="true"></i> Extension</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TWO METHODS: API vs Extension -->
+  <section class="section section-methods" id="methods">
+    <div class="section-inner reveal-on-scroll">
+      <h2 class="section-title">Call the API, or let the extension handle it</h2>
+
+      <div class="method-grid">
+        <article class="method-card">
+          <div class="method-top">
+            <div class="card-icon"><i class="fa-solid fa-code" aria-hidden="true"></i></div>
+            <h3>Use the API</h3>
+          </div>
+          <ul class="check-list">
+            <li>Single REST endpoint — POST and receive a token</li>
+            <li>Python &amp; Node.js friendly; Selenium / Playwright / Puppeteer compatible</li>
+            <li>WebSocket channel for long-running scripts</li>
+            <li>Built for high concurrency</li>
+          </ul>
+          <a href="#" class="btn btn-outline" data-scroll="docs">Read API docs</a>
+        </article>
+
+        <article class="method-card">
+          <div class="method-top">
+            <div class="card-icon"><i class="fa-brands fa-chrome" aria-hidden="true"></i></div>
+            <h3>Use the extension</h3>
+          </div>
+          <ul class="check-list">
+            <li>Auto-detects FunCaptcha on the target page</li>
+            <li>Resolves silently in the background with your API key</li>
+            <li>No code required — install and go</li>
+            <li>Same credits, same solver network</li>
+          </ul>
+          <a href="#" class="btn btn-outline" data-view="panel">Get your key</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ENTERPRISE (4 cards, heading carries an inline CTA) -->
+  <section class="section section-enterprise">
+    <div class="section-inner reveal-on-scroll">
+      <div class="section-head">
+        <div>
+          <div class="section-label">Enterprise</div>
+          <h2 class="section-title">Reliable at production volume</h2>
+        </div>
+        <div class="section-head-actions">
+          <a href="#" class="btn btn-primary btn-sm" data-view="panel">Talk to us</a>
+        </div>
+      </div>
+
+      <div class="ent-grid">
+        <div class="card-sm">
+          <div class="card-icon sm"><i class="fa-solid fa-gauge-high" aria-hidden="true"></i></div>
+          <h4>Consistent pass rate</h4>
+          <p>Tokens come from a human solver network, so they clear Arkose verification — not AI guesses.</p>
+        </div>
+        <div class="card-sm">
+          <div class="card-icon sm"><i class="fa-solid fa-coins" aria-hidden="true"></i></div>
+          <h4>Predictable cost</h4>
+          <p>One credit per successful solve. Buy in bulk, pay less per solve, and credits never expire.</p>
+        </div>
+        <div class="card-sm">
+          <div class="card-icon sm"><i class="fa-solid fa-bolt-lightning" aria-hidden="true"></i></div>
+          <h4>High concurrency</h4>
+          <p>Fire requests in parallel over REST or stream solve events over WebSocket. The queue keeps up.</p>
+        </div>
+        <div class="card-sm">
+          <div class="card-icon sm"><i class="fa-solid fa-headset" aria-hidden="true"></i></div>
+          <h4>Direct support</h4>
+          <p>Reach a human on Discord or Telegram for top-ups, troubleshooting, and volume questions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOCS -->
+  <section class="section section-docs" id="docs">
+    <div class="section-inner reveal-on-scroll">
+      <div class="section-label">Integration</div>
+      <h2 class="section-title">Start in under a minute</h2>
+      <p class="section-sub">Pick your language and copy. Your key goes in the <code>X-API-Key</code> header.</p>
+
+      <div class="docs-layout">
+        <nav class="docs-nav">
+          <button class="docs-nav-item active" data-dtarget="python">Python</button>
+          <button class="docs-nav-item" data-dtarget="curl">cURL</button>
+          <button class="docs-nav-item" data-dtarget="node">Node.js</button>
+          <button class="docs-nav-item" data-dtarget="ws">WebSocket</button>
+
+          <div style="margin-top:24px;padding-top:16px;border-top:1px solid var(--line)">
+            <div style="font-family:var(--font-mono);font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--slate);margin-bottom:12px">Endpoints</div>
+          </div>
+
+          <div class="api-endpoint" style="flex-direction:column;align-items:flex-start;gap:6px">
+            <div style="display:flex;align-items:center;gap:8px">
+              <span class="method-badge method-post">POST</span>
+              <code style="background:none;padding:0;color:var(--linen)">/api/captcha/solve</code>
+            </div>
+            <div style="font-size:11px;color:var(--slate)">Full bypass — returns token</div>
+          </div>
+
+          <div class="api-endpoint" style="flex-direction:column;align-items:flex-start;gap:6px;margin-top:6px">
+            <div style="display:flex;align-items:center;gap:8px">
+              <span class="method-badge method-get">GET</span>
+              <code style="background:none;padding:0;color:var(--linen)">/api/captcha/credits</code>
+            </div>
+            <div style="font-size:11px;color:var(--slate)">Check credit balance</div>
+          </div>
+        </nav>
+
+        <div class="docs-content">
+          <div class="docs-tabs">
+            <button class="dtab active" data-dtab="python">Python</button>
+            <button class="dtab" data-dtab="curl">cURL</button>
+            <button class="dtab" data-dtab="node">Node.js</button>
+            <button class="dtab" data-dtab="ws">WebSocket</button>
+          </div>
+
+          <div class="dtab-pane active" id="dtab-python"><pre class="code-block">import requests
+
+API_KEY = <span class="cs">"brk_your_key_here"</span>
+BASE    = <span class="cs">"https://bearcaptcha.live/api"</span>
+
+<span class="ck"># one call — returns verified token</span>
+resp  = requests.post(
+    f<span class="cs">"{BASE}/captcha/solve"</span>,
+    headers={<span class="cs">"X-API-Key"</span>: API_KEY},
+    json={
+        <span class="cs">"pageurl"</span>:   <span class="cs">"https://target-site.com/login"</span>,
+        <span class="cs">"publickey"</span>: <span class="cs">"YOUR-ARKOSE-PUBLIC-KEY"</span>
+    },
+    timeout=60
+)
+token = resp.json()[<span class="cs">"token"</span>]
+
+<span class="ck"># check remaining balance</span>
+bal = requests.get(
+    f<span class="cs">"{BASE}/captcha/credits"</span>,
+    headers={<span class="cs">"X-API-Key"</span>: API_KEY}
+).json()[<span class="cs">"credits"</span>]
+print(<span class="cs">f"Token: {token[:30]}...  |  Credits left: {bal}"</span>)</pre></div>
+
+          <div class="dtab-pane" id="dtab-curl"><pre class="code-block">curl -X POST https://bearcaptcha.live/api/captcha/solve \
+  -H <span class="cs">"X-API-Key: brk_your_key_here"</span> \
+  -H <span class="cs">"Content-Type: application/json"</span> \
+  -d <span class="cs">'{"pageurl":"https://target-site.com/login","publickey":"YOUR-ARKOSE-PUBLIC-KEY"}'</span>
+
+<span class="ck"># response</span>
+{
+  <span class="cs">"success"</span>: true,
+  <span class="cs">"token"</span>: <span class="cs">"session_token|..."</span>,
+  <span class="cs">"credits_remaining"</span>: 499
+}</pre></div>
+
+          <div class="dtab-pane" id="dtab-node"><pre class="code-block">const res = await fetch(<span class="cs">"https://bearcaptcha.live/api/captcha/solve"</span>, {
+  method: <span class="cs">"POST"</span>,
+  headers: {
+    <span class="cs">"X-API-Key"</span>: <span class="cs">"brk_your_key_here"</span>,
+    <span class="cs">"Content-Type"</span>: <span class="cs">"application/json"</span>
+  },
+  body: JSON.stringify({
+    pageurl: <span class="cs">"https://target-site.com/login"</span>,
+    publickey: <span class="cs">"YOUR-ARKOSE-PUBLIC-KEY"</span>
+  })
+});
+const { token } = await res.json();
+console.log(token.slice(0, 30) + <span class="cs">"..."</span>);</pre></div>
+
+          <div class="dtab-pane" id="dtab-ws"><pre class="code-block">import asyncio, websockets, json
+
+async def solve():
+    uri = <span class="cs">"wss://bearcaptcha.live/ws"</span>
+    async with websockets.connect(uri) as ws:
+        await ws.send(json.dumps({<span class="cs">"event"</span>: <span class="cs">"auth"</span>, <span class="cs">"api_key"</span>: <span class="cs">"brk_key"</span>}))
+        await ws.recv()  <span class="ck"># auth_ok</span>
+
+        await ws.send(json.dumps({
+            <span class="cs">"event"</span>: <span class="cs">"solve"</span>,
+            <span class="cs">"request_id"</span>: <span class="cs">"1"</span>,
+            <span class="cs">"pageurl"</span>: <span class="cs">"https://target-site.com/login"</span>,
+            <span class="cs">"publickey"</span>: <span class="cs">"YOUR-ARKOSE-PUBLIC-KEY"</span>
+        }))
+        result = json.loads(await ws.recv())  <span class="ck"># solving</span>
+        result = json.loads(await ws.recv())  <span class="ck"># solved</span>
+        print(result[<span class="cs">"token"</span>])
+
+asyncio.run(solve())</pre></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MID-PAGE CTA BAND -->
+  <section class="cta-band">
+    <div class="cta-inner reveal-on-scroll">
+      <h2>Resolve FunCaptcha with confidence</h2>
+      <p>Generate a key, drop in one call, and keep your automation moving.</p>
+      <div class="cta-actions">
+        <button class="btn btn-primary btn-lg" data-view="panel">Get your API key</button>
+        <a href="#" class="btn btn-outline btn-lg" data-scroll="docs">Read the docs</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING (flat, equal-row table — CapSolver signature) -->
+  <section class="section section-pricing" id="pricing">
+    <div class="section-inner reveal-on-scroll">
+      <div class="section-label">Pricing</div>
+      <h2 class="section-title">Pay once. Use whenever.</h2>
+      <p class="section-sub">No subscriptions, no expiry. Bigger packages bring the cost per solve down — credits sit in your account until you need them.</p>
+
+      <div class="price-table-wrap">
+        <table class="price-table">
+          <thead>
+            <tr>
+              <th>Package</th>
+              <th>Credits</th>
+              <th>Per solve</th>
+              <th>Price</th>
+              <th class="price-cta-col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="price-name">Starter</span></td>
+              <td>1,000</td>
+              <td><span class="rate-pill">$0.0030</span></td>
+              <td class="price-amt">$3</td>
+              <td class="price-cta-col"><button class="btn btn-outline btn-sm" data-purchase>Choose</button></td>
+            </tr>
+            <tr class="price-feature">
+              <td><span class="price-name">Pro <span class="price-badge">Best value</span></span></td>
+              <td>10,000</td>
+              <td><span class="rate-pill">$0.0025</span></td>
+              <td class="price-amt">$25</td>
+              <td class="price-cta-col"><button class="btn btn-primary btn-sm" data-purchase>Choose</button></td>
+            </tr>
+            <tr>
+              <td><span class="price-name">Bulk</span></td>
+              <td>50,000</td>
+              <td><span class="rate-pill">$0.0020</span></td>
+              <td class="price-amt">$100</td>
+              <td class="price-cta-col"><button class="btn btn-outline btn-sm" data-purchase>Choose</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="pricing-note">
+        To purchase credits, generate your API key first, then reach out on Discord or Telegram to top up.
+      </p>
+    </div>
+  </section>
+
+  <!-- COMPLIANCE NOTE -->
+  <section class="section section-compliance">
+    <div class="section-inner reveal-on-scroll">
+      <div class="compliance-card">
+        <div class="compliance-icon"><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i></div>
+        <div>
+          <div class="section-label">Responsible use</div>
+          <h3>Built for collecting publicly available data</h3>
+          <p>BearCaptcha is intended for legitimate automation and the aggregation of publicly accessible web data. It is not a tool for accessing private accounts or harvesting sensitive personal information.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER (multi-column) -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="footer-brandcol">
+        <div class="footer-brand">
+          <span class="brand-icon"><i class="fa-solid fa-paw"></i></span>
+          BearCaptcha
+        </div>
+        <p class="footer-tagline">Arkose FunCaptcha, resolved in one call.</p>
+        <div class="footer-contact">
+          <a href="#" aria-label="Discord" data-purchase><i class="fa-brands fa-discord" aria-hidden="true"></i></a>
+          <a href="#" aria-label="Telegram" data-purchase><i class="fa-brands fa-telegram" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-col-title">Product</div>
+        <a href="#" data-scroll="solutions">Solutions</a>
+        <a href="#" data-scroll="pricing">Pricing</a>
+        <a href="#" data-view="panel">My Panel</a>
+        <a href="#" data-scroll="integrations">Integrations</a>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-col-title">Developers</div>
+        <a href="#" data-scroll="docs">Documentation</a>
+        <a href="#" data-scroll="docs">API reference</a>
+        <a href="#" data-scroll="methods">Browser extension</a>
+        <a href="#" data-scroll="docs">WebSocket</a>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-col-title">Account</div>
+        <a href="#" data-view="panel">Look up a key</a>
+        <a href="#" data-purchase>Buy credits</a>
+        <a href="#" id="footerAdmin">Admin</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 BearCaptcha · bearcaptcha.live</span>
+      <span class="footer-copy">All rights reserved.</span>
+    </div>
+  </footer>
+
+</div><!-- /view-home -->
+
+
+<!-- ================================================================ BUYER PANEL -->
+<div id="view-panel" class="view">
+  <div class="panel-page">
+    <div class="page-header">
+      <div class="section-label">API Access</div>
+      <h1>My Panel</h1>
+      <p>Enter your API key to view your balance and usage.</p>
+    </div>
+
+    <div class="lookup-card">
+      <div class="form-group">
+        <label for="panel-key-input">API Key</label>
+        <div class="input-row">
+          <input type="text" id="panel-key-input" placeholder="brk_..." autocomplete="off" spellcheck="false" />
+          <button class="btn btn-primary" id="panel-lookup-btn">
+            <i class="fa-solid fa-arrow-right"></i> Look up
+          </button>
+        </div>
+      </div>
+      <div id="panel-error" class="panel-error" style="display:none">
+        <i class="fa-solid fa-circle-exclamation"></i> <span id="panel-error-text"></span>
+      </div>
+    </div>
+
+    <div id="panel-result" style="display:none">
+      <div class="panel-stats">
+        <div class="pstat">
+          <div class="pstat-val" id="pstat-credits">0</div>
+          <div class="pstat-lbl">Credits</div>
+        </div>
+        <div class="pstat">
+          <div class="pstat-val" id="pstat-requests">0</div>
+          <div class="pstat-lbl">Total Solves</div>
+        </div>
+        <div class="pstat">
+          <div class="pstat-val" id="pstat-status">—</div>
+          <div class="pstat-lbl">Status</div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <h4>Your Key</h4>
+        <div class="key-row">
+          <code id="pstat-key-display"></code>
+          <button class="btn btn-outline btn-sm" id="panel-copy-key">
+            <i class="fa-regular fa-copy"></i> Copy
+          </button>
+        </div>
+        <p class="key-hint" style="margin-top:10px">Send as <code>X-API-Key</code> header in every request.</p>
+      </div>
+
+      <div class="info-card" style="margin-top:12px">
+        <h4>Quick Start</h4>
+        <pre class="code-block" style="border-radius:var(--r-md);margin-top:0">import requests
+
+token = requests.post(
+    <span class="cs">"https://bearcaptcha.live/api/captcha/solve"</span>,
+    headers={<span class="cs">"X-API-Key"</span>: <span id="qs-key-inline" class="cs">"brk_your_key"</span>},
+    json={<span class="cs">"pageurl"</span>: <span class="cs">"https://target-site.com/login"</span>,
+          <span class="cs">"publickey"</span>: <span class="cs">"YOUR-ARKOSE-PUBLIC-KEY"</span>},
+    timeout=60
+).json()[<span class="cs">"token"</span>]</pre>
+      </div>
+
+      <div class="notice-credits">
+        <i class="fa-solid fa-coins"></i>
+        <div>
+          <strong>Need more credits?</strong>
+          <p>Contact on Discord or Telegram to top up. Credits never expire.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /view-panel -->
+
+
+<!-- ================================================================ ADMIN -->
+<div id="view-admin" class="view">
+  <div class="admin-shell">
+    <aside class="admin-rail">
+      <div class="rail-brand">
+        <span>Administration</span>
+      </div>
+      <nav class="rail-nav">
+        <button class="rlink active" data-tab="overview">
+          <i class="fa-solid fa-gauge-high"></i> Overview
+        </button>
+        <button class="rlink" data-tab="keys">
+          <i class="fa-solid fa-key"></i> API Keys
+        </button>
+        <button class="rlink" data-tab="credits">
+          <i class="fa-solid fa-coins"></i> Add Credits
+        </button>
+      </nav>
+      <div class="rail-bottom">
+        <button class="rail-logout" id="adminLogoutBtn">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i> Log out
+        </button>
+      </div>
+    </aside>
+
+    <main class="admin-body">
+
+      <!-- OVERVIEW -->
+      <div class="atab active" id="atab-overview">
+        <div class="admin-topbar">
+          <h2>Overview</h2>
+          <button class="btn btn-outline btn-sm" id="refreshBtn">
+            <i class="fa-solid fa-arrows-rotate"></i> Refresh
+          </button>
+        </div>
+        <div class="kpi-row">
+          <div class="kpi"><div class="kpi-val" id="a-total-keys">—</div><div class="kpi-lbl">Total Keys</div></div>
+          <div class="kpi"><div class="kpi-val" id="a-active-keys">—</div><div class="kpi-lbl">Active</div></div>
+          <div class="kpi"><div class="kpi-val" id="a-total-requests">—</div><div class="kpi-lbl">Total Solves</div></div>
+          <div class="kpi"><div class="kpi-val" id="a-total-credits">—</div><div class="kpi-lbl">Credits Issued</div></div>
+          <div class="kpi"><div class="kpi-val" id="a-2c-balance">—</div><div class="kpi-lbl">Solver Balance</div></div>
+        </div>
+        <div class="section-heading">All Keys</div>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th>Label</th><th>Key</th><th>Credits</th><th>Solves</th><th>Last used</th><th>Status</th></tr></thead>
+            <tbody id="overview-keys-body"><tr><td colspan="6" class="tbl-empty">Loading...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- KEYS -->
+      <div class="atab" id="atab-keys">
+        <div class="admin-topbar">
+          <h2>API Keys</h2>
+          <button class="btn btn-primary btn-sm" id="newKeyBtn">
+            <i class="fa-solid fa-plus"></i> New Key
+          </button>
+        </div>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th>Label</th><th>Key</th><th>Credits</th><th>Solves</th><th>Created</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="admin-keys-body"><tr><td colspan="7" class="tbl-empty">No keys yet</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ADD CREDITS -->
+      <div class="atab" id="atab-credits">
+        <div class="admin-topbar"><h2>Add Credits</h2></div>
+        <div class="card" style="max-width:440px">
+          <h3>Top up a key</h3>
+          <div class="form-group">
+            <label for="credit-key-select">Select Key</label>
+            <select id="credit-key-select"><option value="">— choose a key —</option></select>
+          </div>
+          <div class="form-group">
+            <label for="credit-amount">Amount</label>
+            <input type="number" id="credit-amount" min="1" placeholder="e.g. 500" />
+          </div>
+          <button class="btn btn-primary full-width" id="addCreditsBtn">
+            <i class="fa-solid fa-plus"></i> Add Credits
+          </button>
+          <div id="credits-feedback" class="credits-fb" style="display:none"></div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div><!-- /view-admin -->
+
+
+<!-- ================================================================ MODALS -->
+
+<!-- Admin login -->
+<div class="modal-overlay" id="adminModal" style="display:none">
+  <div class="modal">
+    <div class="modal-header">
+      <h3><i class="fa-solid fa-lock"></i> Admin Login</h3>
+      <button class="modal-close" id="adminModalClose" aria-label="Close dialog"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label for="adminSecretInput">Secret</label>
+        <input type="password" id="adminSecretInput" placeholder="Admin secret" />
+      </div>
+      <div id="admin-login-error" class="err-msg" style="display:none">Incorrect secret.</div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost btn-sm" id="adminModalCancel">Cancel</button>
+      <button class="btn btn-primary btn-sm" id="adminLoginSubmit">Login</button>
+    </div>
+  </div>
+</div>
+
+<!-- New key -->
+<div class="modal-overlay" id="newKeyModal" style="display:none">
+  <div class="modal">
+    <div class="modal-header">
+      <h3><i class="fa-solid fa-key"></i> New API Key</h3>
+      <button class="modal-close" id="newKeyModalClose" aria-label="Close dialog"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label for="newKeyLabel">Label</label>
+        <input type="text" id="newKeyLabel" placeholder="e.g. customer_username" />
+      </div>
+      <div class="form-group">
+        <label for="newKeyCredits">Starting Credits</label>
+        <input type="number" id="newKeyCredits" min="0" placeholder="0" />
+      </div>
+      <div id="new-key-reveal" style="display:none">
+        <div class="notice notice-ok" style="margin-bottom:12px">
+          <i class="fa-solid fa-circle-check"></i> Key created. Copy it now — it will not be shown again.
+        </div>
+        <pre class="code-block" id="new-key-value" style="white-space:pre-wrap;word-break:break-all;border-radius:var(--r-md)"></pre>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost btn-sm" id="newKeyCancel">Cancel</button>
+      <button class="btn btn-primary btn-sm" id="newKeySubmit">Create</button>
+    </div>
+  </div>
+</div>
+
+<!-- Purchase -->
+<div class="modal-overlay" id="purchaseModal" style="display:none">
+  <div class="modal">
+    <div class="modal-header">
+      <h3><i class="fa-solid fa-cart-shopping"></i> Purchase Credits</h3>
+      <button class="modal-close" id="purchaseModalClose" aria-label="Close dialog"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+    </div>
+    <div class="modal-body">
+      <p class="purchase-lead">DM the owner on Discord to purchase, or open a ticket in the server. Your API key is activated as soon as payment is confirmed.</p>
+
+      <div class="purchase-rate">
+        <span class="purchase-rate-credits">1,000 solves</span>
+        <span class="purchase-rate-sep">for</span>
+        <span class="purchase-rate-price">$3</span>
+      </div>
+
+      <a class="btn btn-primary purchase-discord" href="https://discord.gg/tuxtDKXJq9" target="_blank" rel="noopener noreferrer">
+        <i class="fa-brands fa-discord" aria-hidden="true"></i> Join Discord &amp; open a ticket
+      </a>
+
+      <div class="purchase-pay">
+        <div class="purchase-pay-title">Payments accepted — any crypto</div>
+        <div class="purchase-pay-chips">
+          <span class="pay-chip pay-chip-feat"><i class="fa-solid fa-litecoin-sign" aria-hidden="true"></i> LTC <span class="pay-feat-tag">Featured</span></span>
+          <span class="pay-chip"><i class="fa-brands fa-bitcoin" aria-hidden="true"></i> BTC</span>
+          <span class="pay-chip"><i class="fa-brands fa-ethereum" aria-hidden="true"></i> ETH</span>
+          <span class="pay-chip"><i class="fa-solid fa-coins" aria-hidden="true"></i> Any crypto</span>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost btn-sm" id="purchaseModalCancel">Close</button>
+      <a class="btn btn-primary btn-sm" href="https://discord.gg/tuxtDKXJq9" target="_blank" rel="noopener noreferrer">Purchase now</a>
+    </div>
+  </div>
+</div>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,17 @@
+{
+  "name": "bearcaptcha-obfuscator",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Code virtualizer / encoder / compactor. Reads public/ and emits obfuscated copies to obfuscator/dist/ — public/ is never modified.",
+  "scripts": {
+    "build": "node build.js",
+    "clean": "node build.js --clean-only",
+    "preview": "node serve-dist.js"
+  },
+  "dependencies": {
+    "clean-css": "^5.3.3",
+    "html-minifier-terser": "^7.2.0",
+    "javascript-obfuscator": "^4.1.1"
+  }
+}

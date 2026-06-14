@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BearCaptcha</title>
+  <link rel="stylesheet" href="popup.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+  <div class="popup">
+    <header class="popup-header">
+      <div class="brand">
+        <i class="fa-solid fa-shield-halved"></i>
+        <span>BearCaptcha</span>
+      </div>
+      <div id="status-dot" class="status-dot" title="Connection status"></div>
+    </header>
+
+    <div class="popup-body">
+
+      <section class="section">
+        <label class="label">Server URL</label>
+        <input type="text" id="serverUrl" placeholder="http://localhost:3000" />
+      </section>
+
+      <section class="section">
+        <label class="label">API Key</label>
+        <div class="input-row">
+          <input type="password" id="apiKey" placeholder="crk_..." />
+          <button id="toggleKey" class="icon-btn" title="Show/hide key">
+            <i class="fa-regular fa-eye"></i>
+          </button>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="toggle-row">
+          <div>
+            <div class="toggle-label">Auto-solve</div>
+            <div class="toggle-desc">Automatically detect and solve CAPTCHAs</div>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="autoSolve" checked />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </section>
+
+      <button id="saveBtn" class="btn btn-primary">
+        <i class="fa-solid fa-floppy-disk"></i> Save Settings
+      </button>
+
+      <div class="divider"></div>
+
+      <button id="manualSolveBtn" class="btn btn-secondary">
+        <i class="fa-solid fa-wand-magic-sparkles"></i> Solve Current CAPTCHA
+      </button>
+
+      <div id="result-area" class="result-area" style="display:none">
+        <div id="result-content"></div>
+      </div>
+
+      <div id="save-notice" class="notice" style="display:none">
+        <i class="fa-solid fa-circle-check"></i> Settings saved
+      </div>
+
+    </div>
+
+    <footer class="popup-footer">
+      <a href="#" id="openDashboard"><i class="fa-solid fa-arrow-up-right-from-square"></i> Open Dashboard</a>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
