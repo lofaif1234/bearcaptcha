@@ -1,8 +1,0 @@
-node_modules/
-obfuscator/node_modules/
-obfuscator/dist/
-.env
-data/
-npm-debug.log*
-*.log
-.DS_Store
